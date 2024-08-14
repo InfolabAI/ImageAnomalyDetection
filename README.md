@@ -3,7 +3,7 @@
 - MVTEC dataset 을 다운받아 path a 에 저장
 - `main.py` 내 `mvtec_data_path` 를 path a 로 지정
 
-# 실행 예지
+# 실행 예제
 
 - `python main.py --wan` 으로 wandb 끄고 실행. wandb 사용하려면 wandb.init() 부분에서 wandb id 변경하고 실행.
 - `python main.py --wan --subdatasets capsule` mvtec capsule 에 대해 실험 진행

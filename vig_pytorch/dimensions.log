@@ -1,0 +1,1306 @@
+2024-02-14 18:57:46.705 | DEBUG    | __main__:<module>:49 - debug message
+2024-02-14 18:57:46.706 | INFO     | __main__:<module>:50 - info message
+2024-02-14 18:57:46.706 | WARNING  | __main__:<module>:51 - warning message
+2024-02-14 18:57:46.706 | ERROR    | __main__:<module>:52 - error message
+dpr [0.0, 0.006666666828095913, 0.013333333656191826, 0.019999999552965164, 0.02666666731238365, 0.03333333507180214, 0.03999999910593033, 0.046666666865348816, 0.0533333346247673, 0.06000000238418579, 0.06666667014360428, 0.07333333790302277, 0.07999999821186066, 0.08666666597127914, 0.09333333373069763, 0.10000000149011612]
+num_knn [9, 9, 10, 10, 11, 12, 12, 13, 13, 14, 15, 15, 16, 16, 17, 18]
+DeepGCN(
+  (stem): Stem(
+    (convs): Sequential(
+      (0): Conv2d(3, 40, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      (1): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): GELU(approximate='none')
+      (3): Conv2d(40, 80, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      (4): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): GELU(approximate='none')
+      (6): Conv2d(80, 160, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      (7): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (8): GELU(approximate='none')
+      (9): Conv2d(160, 320, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      (10): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (11): GELU(approximate='none')
+      (12): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (13): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (backbone): Sequential(
+    (0): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): Identity()
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): Identity()
+      )
+    )
+    (1): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.007)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.007)
+      )
+    )
+    (2): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.013)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.013)
+      )
+    )
+    (3): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.020)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.020)
+      )
+    )
+    (4): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.027)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.027)
+      )
+    )
+    (5): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.033)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.033)
+      )
+    )
+    (6): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.040)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.040)
+      )
+    )
+    (7): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.047)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.047)
+      )
+    )
+    (8): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.053)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.053)
+      )
+    )
+    (9): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.060)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.060)
+      )
+    )
+    (10): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.067)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.067)
+      )
+    )
+    (11): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.073)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.073)
+      )
+    )
+    (12): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.080)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.080)
+      )
+    )
+    (13): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.087)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.087)
+      )
+    )
+    (14): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.093)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.093)
+      )
+    )
+    (15): Sequential(
+      (0): Grapher(
+        (fc1): Sequential(
+          (0): Conv2d(320, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (graph_conv): DyGraphConv2d(
+          (gconv): MRConv2d(
+            (nn): BasicConv(
+              (0): Conv2d(640, 640, kernel_size=(1, 1), stride=(1, 1), groups=4)
+              (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): GELU(approximate='none')
+            )
+          )
+          (dilated_knn_graph): DenseDilatedKnnGraph(
+            (_dilated): DenseDilated()
+          )
+        )
+        (fc2): Sequential(
+          (0): Conv2d(640, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.100)
+      )
+      (1): FFN(
+        (fc1): Sequential(
+          (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (act): GELU(approximate='none')
+        (fc2): Sequential(
+          (0): Conv2d(1280, 320, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (drop_path): DropPath(drop_prob=0.100)
+      )
+    )
+  )
+  (prediction): Sequential(
+    (0): Conv2d(320, 1024, kernel_size=(1, 1), stride=(1, 1))
+    (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): GELU(approximate='none')
+    (3): Dropout(p=0.0, inplace=False)
+    (4): Conv2d(1024, 1000, kernel_size=(1, 1), stride=(1, 1))
+  )
+)
+model flops: 4528344720 input_size: [1, 3, 224, 224]
+using repeated_aug
+2024-02-14 18:57:50.912 | DEBUG    | vig:forward:180 - inputs:
+2024-02-14 18:57:52.135 | DEBUG    | vig:forward:182 - stem:
+2024-02-14 18:57:52.135 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.149 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.150 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.150 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.150 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.151 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.154 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.154 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 9]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.155 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 9]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.155 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 9])
+2024-02-14 18:57:52.155 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 9])
+2024-02-14 18:57:52.155 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 9])
+2024-02-14 18:57:52.156 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.156 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 9])
+2024-02-14 18:57:52.156 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([225792])
+2024-02-14 18:57:52.156 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.156 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.157 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([225792, 320])
+2024-02-14 18:57:52.157 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 9])
+2024-02-14 18:57:52.158 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 9])
+2024-02-14 18:57:52.158 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([225792])
+2024-02-14 18:57:52.158 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.158 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.158 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([225792, 320])
+2024-02-14 18:57:52.159 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 9])
+2024-02-14 18:57:52.159 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 9])
+2024-02-14 18:57:52.159 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 9])
+2024-02-14 18:57:52.159 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.234 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.234 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.343 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.548 | DEBUG    | vig:forward:187 - block 0:
+2024-02-14 18:57:52.549 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.549 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.549 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.549 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.550 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.550 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.550 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.550 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 9]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 9]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 9])
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 9])
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 9])
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 9])
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([225792])
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.551 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.552 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([225792, 320])
+2024-02-14 18:57:52.552 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 9])
+2024-02-14 18:57:52.553 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 9])
+2024-02-14 18:57:52.553 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([225792])
+2024-02-14 18:57:52.553 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.553 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.553 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([225792, 320])
+2024-02-14 18:57:52.554 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 9])
+2024-02-14 18:57:52.554 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 9])
+2024-02-14 18:57:52.554 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 9])
+2024-02-14 18:57:52.554 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.554 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.554 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.555 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.556 | DEBUG    | vig:forward:187 - block 1:
+2024-02-14 18:57:52.556 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.557 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.557 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.557 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.557 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.557 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 10]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 10]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 10])
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 10])
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 10])
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 10])
+2024-02-14 18:57:52.558 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([250880])
+2024-02-14 18:57:52.559 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.559 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.559 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([250880, 320])
+2024-02-14 18:57:52.560 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 10])
+2024-02-14 18:57:52.560 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 10])
+2024-02-14 18:57:52.560 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([250880])
+2024-02-14 18:57:52.560 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.560 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.560 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([250880, 320])
+2024-02-14 18:57:52.561 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 10])
+2024-02-14 18:57:52.561 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 10])
+2024-02-14 18:57:52.561 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 10])
+2024-02-14 18:57:52.561 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.561 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.561 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.562 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.563 | DEBUG    | vig:forward:187 - block 2:
+2024-02-14 18:57:52.563 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.563 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.563 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.563 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.564 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.564 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.564 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.564 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 10]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.564 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 10]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.564 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 10])
+2024-02-14 18:57:52.564 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 10])
+2024-02-14 18:57:52.564 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 10])
+2024-02-14 18:57:52.565 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.565 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 10])
+2024-02-14 18:57:52.565 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([250880])
+2024-02-14 18:57:52.565 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.565 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.565 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([250880, 320])
+2024-02-14 18:57:52.565 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 10])
+2024-02-14 18:57:52.566 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 10])
+2024-02-14 18:57:52.566 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([250880])
+2024-02-14 18:57:52.566 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.566 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.566 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([250880, 320])
+2024-02-14 18:57:52.566 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 10])
+2024-02-14 18:57:52.567 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 10])
+2024-02-14 18:57:52.567 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 10])
+2024-02-14 18:57:52.567 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.567 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.567 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.568 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.569 | DEBUG    | vig:forward:187 - block 3:
+2024-02-14 18:57:52.569 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.569 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.569 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.570 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.570 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.570 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.570 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.570 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 22]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.570 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 22]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.571 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 22])
+2024-02-14 18:57:52.571 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 11])
+2024-02-14 18:57:52.571 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 11])
+2024-02-14 18:57:52.571 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.571 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 11])
+2024-02-14 18:57:52.571 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([275968])
+2024-02-14 18:57:52.571 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.571 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.572 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([275968, 320])
+2024-02-14 18:57:52.572 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 11])
+2024-02-14 18:57:52.572 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 11])
+2024-02-14 18:57:52.572 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([275968])
+2024-02-14 18:57:52.572 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.573 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.573 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([275968, 320])
+2024-02-14 18:57:52.573 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 11])
+2024-02-14 18:57:52.573 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 11])
+2024-02-14 18:57:52.573 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 11])
+2024-02-14 18:57:52.573 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.574 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.574 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.574 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.575 | DEBUG    | vig:forward:187 - block 4:
+2024-02-14 18:57:52.575 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.576 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.576 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.576 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.576 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.576 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.576 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 24]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 24]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 24])
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 12])
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 12])
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 12])
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([301056])
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.577 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.578 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([301056, 320])
+2024-02-14 18:57:52.578 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 12])
+2024-02-14 18:57:52.579 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 12])
+2024-02-14 18:57:52.579 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([301056])
+2024-02-14 18:57:52.579 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.579 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.579 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([301056, 320])
+2024-02-14 18:57:52.579 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 12])
+2024-02-14 18:57:52.580 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 12])
+2024-02-14 18:57:52.580 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 12])
+2024-02-14 18:57:52.580 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.580 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.580 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.581 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.582 | DEBUG    | vig:forward:187 - block 5:
+2024-02-14 18:57:52.582 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.582 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.582 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.582 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.582 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.582 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.583 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.583 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 24]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.583 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 24]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.583 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 24])
+2024-02-14 18:57:52.583 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 12])
+2024-02-14 18:57:52.583 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 12])
+2024-02-14 18:57:52.583 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 12])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([301056])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([301056, 320])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 12])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 12])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([301056])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.584 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([301056, 320])
+2024-02-14 18:57:52.585 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 12])
+2024-02-14 18:57:52.585 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 12])
+2024-02-14 18:57:52.585 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 12])
+2024-02-14 18:57:52.586 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.586 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.586 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.587 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.587 | DEBUG    | vig:forward:187 - block 6:
+2024-02-14 18:57:52.587 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.588 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.588 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.588 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.588 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.588 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.589 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.589 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 26]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.589 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 26]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.589 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 26])
+2024-02-14 18:57:52.589 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 13])
+2024-02-14 18:57:52.589 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 13])
+2024-02-14 18:57:52.589 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.589 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 13])
+2024-02-14 18:57:52.590 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([326144])
+2024-02-14 18:57:52.590 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.590 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.590 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([326144, 320])
+2024-02-14 18:57:52.591 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 13])
+2024-02-14 18:57:52.591 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 13])
+2024-02-14 18:57:52.591 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([326144])
+2024-02-14 18:57:52.591 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.591 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.591 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([326144, 320])
+2024-02-14 18:57:52.592 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 13])
+2024-02-14 18:57:52.592 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 13])
+2024-02-14 18:57:52.592 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 13])
+2024-02-14 18:57:52.592 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.593 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.593 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.593 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.594 | DEBUG    | vig:forward:187 - block 7:
+2024-02-14 18:57:52.594 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.594 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.594 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.594 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.595 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.595 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.595 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.595 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 39]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.595 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 39]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.595 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 39])
+2024-02-14 18:57:52.596 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 13])
+2024-02-14 18:57:52.596 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 13])
+2024-02-14 18:57:52.596 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.596 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 13])
+2024-02-14 18:57:52.596 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([326144])
+2024-02-14 18:57:52.596 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.596 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.596 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([326144, 320])
+2024-02-14 18:57:52.597 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 13])
+2024-02-14 18:57:52.597 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 13])
+2024-02-14 18:57:52.597 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([326144])
+2024-02-14 18:57:52.597 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.597 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.597 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([326144, 320])
+2024-02-14 18:57:52.598 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 13])
+2024-02-14 18:57:52.598 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 13])
+2024-02-14 18:57:52.598 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 13])
+2024-02-14 18:57:52.598 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.598 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.599 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.599 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.600 | DEBUG    | vig:forward:187 - block 8:
+2024-02-14 18:57:52.600 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.600 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.600 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.600 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.601 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.601 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.601 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.601 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 42]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.601 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 42]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.601 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 42])
+2024-02-14 18:57:52.601 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 14])
+2024-02-14 18:57:52.601 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 14])
+2024-02-14 18:57:52.602 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.602 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 14])
+2024-02-14 18:57:52.602 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([351232])
+2024-02-14 18:57:52.602 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.602 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.602 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([351232, 320])
+2024-02-14 18:57:52.603 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 14])
+2024-02-14 18:57:52.603 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 14])
+2024-02-14 18:57:52.603 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([351232])
+2024-02-14 18:57:52.603 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.603 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.604 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([351232, 320])
+2024-02-14 18:57:52.604 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 14])
+2024-02-14 18:57:52.604 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 14])
+2024-02-14 18:57:52.604 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 14])
+2024-02-14 18:57:52.604 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.605 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.605 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.605 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.606 | DEBUG    | vig:forward:187 - block 9:
+2024-02-14 18:57:52.606 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.606 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.607 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.607 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.607 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.607 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.607 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.607 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 45]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.607 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 45]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.608 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 45])
+2024-02-14 18:57:52.608 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 15])
+2024-02-14 18:57:52.608 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 15])
+2024-02-14 18:57:52.608 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.608 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 15])
+2024-02-14 18:57:52.608 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([376320])
+2024-02-14 18:57:52.608 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.608 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.609 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([376320, 320])
+2024-02-14 18:57:52.609 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 15])
+2024-02-14 18:57:52.609 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 15])
+2024-02-14 18:57:52.610 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([376320])
+2024-02-14 18:57:52.610 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.610 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.610 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([376320, 320])
+2024-02-14 18:57:52.610 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 15])
+2024-02-14 18:57:52.611 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 15])
+2024-02-14 18:57:52.611 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 15])
+2024-02-14 18:57:52.611 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.611 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.611 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.612 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.612 | DEBUG    | vig:forward:187 - block 10:
+2024-02-14 18:57:52.613 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.613 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.613 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.613 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.613 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.613 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 45]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 45]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 45])
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 15])
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 15])
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 15])
+2024-02-14 18:57:52.614 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([376320])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([376320, 320])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 15])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 15])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([376320])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.615 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([376320, 320])
+2024-02-14 18:57:52.616 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 15])
+2024-02-14 18:57:52.616 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 15])
+2024-02-14 18:57:52.616 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 15])
+2024-02-14 18:57:52.616 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.617 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.617 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.617 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.618 | DEBUG    | vig:forward:187 - block 11:
+2024-02-14 18:57:52.618 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.618 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.618 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.618 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.619 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.619 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.619 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.619 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 64]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.619 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 64]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.620 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 64])
+2024-02-14 18:57:52.620 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 16])
+2024-02-14 18:57:52.620 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 16])
+2024-02-14 18:57:52.620 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.620 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 16])
+2024-02-14 18:57:52.620 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([401408])
+2024-02-14 18:57:52.620 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.620 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.621 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([401408, 320])
+2024-02-14 18:57:52.621 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 16])
+2024-02-14 18:57:52.622 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 16])
+2024-02-14 18:57:52.622 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([401408])
+2024-02-14 18:57:52.622 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.622 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.622 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([401408, 320])
+2024-02-14 18:57:52.622 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 16])
+2024-02-14 18:57:52.623 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 16])
+2024-02-14 18:57:52.623 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 16])
+2024-02-14 18:57:52.623 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.623 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.623 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.624 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.624 | DEBUG    | vig:forward:187 - block 12:
+2024-02-14 18:57:52.625 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.625 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.625 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.625 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.625 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.625 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.626 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.626 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 64]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.626 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 64]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.626 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 64])
+2024-02-14 18:57:52.626 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 16])
+2024-02-14 18:57:52.626 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 16])
+2024-02-14 18:57:52.626 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.626 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 16])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([401408])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([401408, 320])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 16])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 16])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([401408])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.627 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([401408, 320])
+2024-02-14 18:57:52.628 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 16])
+2024-02-14 18:57:52.628 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 16])
+2024-02-14 18:57:52.628 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 16])
+2024-02-14 18:57:52.628 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.629 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.629 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.629 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.630 | DEBUG    | vig:forward:187 - block 13:
+2024-02-14 18:57:52.630 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.630 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.630 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.631 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.631 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.631 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.631 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.631 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 68]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.631 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 68]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.631 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 68])
+2024-02-14 18:57:52.632 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 17])
+2024-02-14 18:57:52.632 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 17])
+2024-02-14 18:57:52.632 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.632 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 17])
+2024-02-14 18:57:52.632 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([426496])
+2024-02-14 18:57:52.632 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.632 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.633 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([426496, 320])
+2024-02-14 18:57:52.633 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 17])
+2024-02-14 18:57:52.633 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 17])
+2024-02-14 18:57:52.633 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([426496])
+2024-02-14 18:57:52.634 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.634 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.634 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([426496, 320])
+2024-02-14 18:57:52.634 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 17])
+2024-02-14 18:57:52.634 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 17])
+2024-02-14 18:57:52.634 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 17])
+2024-02-14 18:57:52.635 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.635 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.635 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.635 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.636 | DEBUG    | vig:forward:187 - block 14:
+2024-02-14 18:57:52.636 | DEBUG    | gcn_lib.torch_vertex:forward:217 - In Grapher x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.637 | DEBUG    | gcn_lib.torch_vertex:forward:220 - In Grapher x.shape after fc1: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.637 | DEBUG    | gcn_lib.torch_vertex:forward:148 - In DyGraphConv2d x.shape: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.637 | DEBUG    | gcn_lib.torch_vertex:forward:155 - In DyGraphConv2d x.shape after reshape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.637 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:65 - In dense_knn_matrix, x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.637 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:67 - In dense_knn_matrix, x.shape after transpose: torch.Size([128, 196, 320])
+2024-02-14 18:57:52.637 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:88 - In dense_knn_matrix, dist.shape: torch.Size([128, 196, 196]) [batch_size, num_points, num_points] distance values
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:93 - In dense_knn_matrix, nn_idx.shape: torch.Size([128, 196, 72]) [batch_size, num_points, selected topk] indices
+ nn_idx[:, :, 0] 은 자기 자신의 index 
+ nn_idx[:, :, 1] 은 가장 가까운 이웃 
+ nn_idx[:, :, 2] 는 그 다음 가까운 이웃 
+ ... 
+ nn_idx[:, :, k-1] 은 k개 중 가장 멀리 떨어진 이웃. 사실 nn_idx 만 있어도 kNN 에 따른 edge 정보를 모두 가지고 있음
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_edge:dense_knn_matrix:99 - In dense_knn_matrix, center_idx.shape: torch.Size([128, 196, 72]) [batch_size, num_points, k] indices
+ center_idx[:, :, 0] 은 자기 자신의 index 
+ center_idx[:, :, 1] 은 자기 자신의 index 
+ center_idx[:, :, 2] 는 자기 자신의 index 
+ ... 
+ center_idx[:, :, k-1] 은 자기 자신의 index
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_edge:forward:188 - In DenseDilatedKnnGraph, edge_index.shape when y is None: torch.Size([2, 128, 196, 72])
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_edge:forward:192 - In DenseDilatedKnnGraph, out.shape after _dilated: torch.Size([2, 128, 196, 18])
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_vertex:forward:159 - In DyGraphConv2d edge_index.shape after self.dilated_knn_graph: torch.Size([2, 128, 196, 18])
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_vertex:forward:24 - In MRConv2d x.shape: torch.Size([128, 320, 196, 1])
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 18])
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([451584])
+2024-02-14 18:57:52.638 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.639 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.639 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([451584, 320])
+2024-02-14 18:57:52.640 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 18])
+2024-02-14 18:57:52.640 | DEBUG    | gcn_lib.torch_nn:batched_index_select:117 - In batched_index_select idx.shape: torch.Size([128, 196, 18])
+2024-02-14 18:57:52.640 | DEBUG    | gcn_lib.torch_nn:batched_index_select:119 - In batched_index_select idx.shape after view: torch.Size([451584])
+2024-02-14 18:57:52.640 | DEBUG    | gcn_lib.torch_nn:batched_index_select:122 - In batched_index_select x.shape after transpose: torch.Size([128, 196, 320, 1])
+2024-02-14 18:57:52.640 | DEBUG    | gcn_lib.torch_nn:batched_index_select:124 - In batched_index_select feature.shape after view: torch.Size([25088, 320])
+2024-02-14 18:57:52.640 | DEBUG    | gcn_lib.torch_nn:batched_index_select:127 - In batched_index_select feature.shape after idx: torch.Size([451584, 320])
+2024-02-14 18:57:52.641 | DEBUG    | gcn_lib.torch_nn:batched_index_select:131 - In batched_index_select feature.shape after view and permute: torch.Size([128, 320, 196, 18])
+2024-02-14 18:57:52.641 | DEBUG    | gcn_lib.torch_vertex:forward:32 - In MRConv2d x_i.shape: torch.Size([128, 320, 196, 18])
+2024-02-14 18:57:52.641 | DEBUG    | gcn_lib.torch_vertex:forward:33 - In MRConv2d x_j.shape: torch.Size([128, 320, 196, 18])
+2024-02-14 18:57:52.641 | DEBUG    | gcn_lib.torch_vertex:forward:40 - In MRConv2d x.shape after reshape: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.641 | DEBUG    | gcn_lib.torch_vertex:forward:162 - In DyGraphConv2d x.shape after super(DyGraphConv2d, self).forward: torch.Size([128, 640, 196, 1])
+2024-02-14 18:57:52.642 | DEBUG    | gcn_lib.torch_vertex:forward:224 - In Grapher x.shape after graph_conv: torch.Size([128, 640, 14, 14])
+2024-02-14 18:57:52.642 | DEBUG    | gcn_lib.torch_vertex:forward:226 - In Grapher x.shape after fc2: torch.Size([128, 320, 14, 14])
+2024-02-14 18:57:52.643 | DEBUG    | vig:forward:187 - block 15:
+2024-02-14 18:57:52.643 | DEBUG    | vig:forward:190 - adaptive_avg_pool2d:
+2024-02-14 18:57:52.785 | DEBUG    | vig:forward:192 - out:
+2024-02-14 18:57:52.785 | INFO     | vig:forward:195 - EXIT

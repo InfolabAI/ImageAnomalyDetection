@@ -1,0 +1,75 @@
+program: main.py
+project: ours
+entity: ofcfelight
+name: 240419_vig_score_patchlevel_iv
+method: bayes
+metric:
+  name: Average_auroc_all_seed
+  goal: maximize
+
+parameters:
+  norm:
+    #values: ["batch", "instance"] # NOTE instance norm 은 에러남
+    value: batch # NOTE instance norm 은 에러남
+  mainmodel:
+    value: "vig_score_patchlevel_iv"
+  batch_size:
+    value: 1
+  gan_epochs:
+    value: 4
+  meta_epochs:
+    value: 40 # 1000 으로 설정하면 14h 까지 걸리는데, 성능은 좋지 않음. 좋을 성능이면 이미 앞에서 끝남.
+  lr:
+    # preprojection 용
+    min: 0.0001
+    max: 0.01
+  dsc_lr:
+    # main model 용
+    min: 0.0001
+    max: 0.01
+  k:
+    values: [5, 6, 7, 8, 9]
+  conv:
+    values: ["edge", "mr", "sage", "gin"]
+  act:
+    values: ["relu", "prelu", "leakyrelu", "gelu", "hswish"]
+  bias:
+    values: [0, 1]
+  vig_backbone_pooling:
+    values: [0, 1]
+  pre_proj:
+    values: [1, 2, 3]
+  n_blocks:
+    values: [1, 2, 3, 4, 5, 6, 7, 8]
+  n_filters:
+    values: [64, 96, 192, 384, 768]
+  dropout:
+    values: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]
+  drop_path:
+    values: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]
+  use_dilation:
+    values: [0, 1]
+  epsilon:
+    values: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+  ea_patience:
+    values: [1, 2, 3]
+  ea_delta:
+    values: [0.0, 0.01]
+  ea_warmup:
+    values: [10, 20, 40]
+  #patchsize: patchlevel 에선 의미없음
+  #  values: [3, 5, 7, 9]
+  mix_noise:
+    values: [1, 2, 3]
+  noise_std:
+    values: [0.005, 0.015, 0.05]
+  la_v:
+    min: 0.001
+    max: 1.0
+  intervention_times:
+    distribution: int_uniform
+    min: 10
+    max: 1000
+  la_penalty:
+    min: 0.001
+    max: 1.0

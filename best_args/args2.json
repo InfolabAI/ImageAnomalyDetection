@@ -1,0 +1,305 @@
+{
+  "k": {
+    "desc": null,
+    "value": 6
+  },
+  "lr": {
+    "desc": null,
+    "value": 0.0017658489314656045
+  },
+  "act": {
+    "desc": null,
+    "value": "prelu"
+  },
+  "gpu": {
+    "desc": null,
+    "value": [0]
+  },
+  "wan": {
+    "desc": null,
+    "value": true
+  },
+  "bias": {
+    "desc": null,
+    "value": 0
+  },
+  "conv": {
+    "desc": null,
+    "value": "edge"
+  },
+  "gray": {
+    "desc": null,
+    "value": 0
+  },
+  "name": {
+    "desc": null,
+    "value": "lg"
+  },
+  "norm": {
+    "desc": null,
+    "value": "batch"
+  },
+  "onnx": {
+    "desc": null,
+    "value": "no"
+  },
+  "seed": {
+    "desc": null,
+    "value": 0
+  },
+  "hflip": {
+    "desc": null,
+    "value": 0
+  },
+  "scale": {
+    "desc": null,
+    "value": 0
+  },
+  "vflip": {
+    "desc": null,
+    "value": 0
+  },
+  "_wandb": {
+    "desc": null,
+    "value": {
+      "t": {
+        "1": [1, 5, 41, 49, 53, 55, 63],
+        "2": [1, 5, 41, 49, 51, 53, 55, 63],
+        "3": [16, 23, 37],
+        "4": "3.9.17",
+        "5": "0.15.9",
+        "8": [2, 5]
+      },
+      "framework": "torch",
+      "start_time": 1710610967.299131,
+      "cli_version": "0.15.9",
+      "is_jupyter_run": false,
+      "python_version": "3.9.17",
+      "is_kaggle_kernel": true
+    }
+  },
+  "cos_lr": {
+    "desc": null,
+    "value": false
+  },
+  "dsc_lr": {
+    "desc": null,
+    "value": 0.003382518549848588
+  },
+  "resize": {
+    "desc": null,
+    "value": 329
+  },
+  "augment": {
+    "desc": null,
+    "value": false
+  },
+  "dropout": {
+    "desc": null,
+    "value": 0.4
+  },
+  "epsilon": {
+    "desc": null,
+    "value": 0.2
+  },
+  "contrast": {
+    "desc": null,
+    "value": 0
+  },
+  "ea_delta": {
+    "desc": null,
+    "value": 0.1
+  },
+  "lambda_f": {
+    "desc": null,
+    "value": 1
+  },
+  "lambda_t": {
+    "desc": null,
+    "value": 0
+  },
+  "n_blocks": {
+    "desc": null,
+    "value": 1
+  },
+  "pre_proj": {
+    "desc": null,
+    "value": 1
+  },
+  "run_name": {
+    "desc": null,
+    "value": "test"
+  },
+  "data_path": {
+    "desc": null,
+    "value": "/home/robert.lim/main/config.json"
+  },
+  "drop_path": {
+    "desc": null,
+    "value": 0.7
+  },
+  "ea_warmup": {
+    "desc": null,
+    "value": 20
+  },
+  "imagesize": {
+    "desc": null,
+    "value": 288
+  },
+  "lambda_tf": {
+    "desc": null,
+    "value": 0.1
+  },
+  "log_group": {
+    "desc": null,
+    "value": ""
+  },
+  "mainmodel": {
+    "desc": null,
+    "value": "vig"
+  },
+  "mix_noise": {
+    "desc": null,
+    "value": 1
+  },
+  "n_classes": {
+    "desc": null,
+    "value": 2
+  },
+  "n_filters": {
+    "desc": null,
+    "value": 48
+  },
+  "noise_std": {
+    "desc": null,
+    "value": 0.05
+  },
+  "patchsize": {
+    "desc": null,
+    "value": 7
+  },
+  "translate": {
+    "desc": null,
+    "value": 0
+  },
+  "auto_noise": {
+    "desc": null,
+    "value": 0
+  },
+  "batch_size": {
+    "desc": null,
+    "value": 1
+  },
+  "brightness": {
+    "desc": null,
+    "value": 0
+  },
+  "dsc_hidden": {
+    "desc": null,
+    "value": 1024
+  },
+  "dsc_layers": {
+    "desc": null,
+    "value": 2
+  },
+  "dsc_margin": {
+    "desc": null,
+    "value": 0.5
+  },
+  "gan_epochs": {
+    "desc": null,
+    "value": 8
+  },
+  "sample_len": {
+    "desc": null,
+    "value": -999
+  },
+  "saturation": {
+    "desc": null,
+    "value": 0
+  },
+  "ea_patience": {
+    "desc": null,
+    "value": 4
+  },
+  "log_project": {
+    "desc": null,
+    "value": "project"
+  },
+  "meta_epochs": {
+    "desc": null,
+    "value": 100
+  },
+  "num_workers": {
+    "desc": null,
+    "value": 2
+  },
+  "subdatasets": {
+    "desc": null,
+    "value": ["SIDE_ESOC4_0.01", "PCBNG_0.01"]
+  },
+  "results_path": {
+    "desc": null,
+    "value": "lg_results"
+  },
+  "sample_ratio": {
+    "desc": null,
+    "value": 0.49
+  },
+  "use_dilation": {
+    "desc": null,
+    "value": 0
+  },
+  "backbone_names": {
+    "desc": null,
+    "value": ["wideresnet50"]
+  },
+  "rotate_degrees": {
+    "desc": null,
+    "value": 0
+  },
+  "train_backbone": {
+    "desc": null,
+    "value": false
+  },
+  "use_stochastic": {
+    "desc": null,
+    "value": false
+  },
+  "aed_meta_epochs": {
+    "desc": null,
+    "value": 1
+  },
+  "include_reverse": {
+    "desc": null,
+    "value": "no"
+  },
+  "proj_layer_type": {
+    "desc": null,
+    "value": 0
+  },
+  "train_val_split": {
+    "desc": null,
+    "value": 1
+  },
+  "true_false_edge": {
+    "desc": null,
+    "value": 0
+  },
+  "layers_to_extract_from": {
+    "desc": null,
+    "value": ["layer2", "layer3"]
+  },
+  "target_embed_dimension": {
+    "desc": null,
+    "value": 1536
+  },
+  "pretrain_embed_dimension": {
+    "desc": null,
+    "value": 1536
+  },
+  "save_segmentation_images": {
+    "desc": null,
+    "value": false
+  }
+}

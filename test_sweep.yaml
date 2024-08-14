@@ -1,0 +1,12 @@
+program: main.py
+project: ours
+entity: ofcfelight
+name: 240408_simple_patchcore
+method: grid
+
+parameters:
+  test_arg_path:
+    values: [
+        "/home/robert.lim/main/other_methods/my_GNN_SimpleNet/best_args/simple.json",
+        #"/home/robert.lim/main/other_methods/my_GNN_SimpleNet/best_args/patchcore.json",
+      ]
